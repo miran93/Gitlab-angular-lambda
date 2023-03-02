@@ -33,7 +33,8 @@ jobs:
       - name: List Files in Distribution Directory
         run: ls -R ./dist
       - name : Install plugin
-        run: serverless plugin install -n serverless-offline
+        run: |
+          npm install serverless-offline --save-dev
       - name: Upload
         uses: serverless/github-action@master
         with:
