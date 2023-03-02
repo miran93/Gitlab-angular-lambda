@@ -32,6 +32,8 @@ jobs:
           npm run build:prod
       - name: List Files in Distribution Directory
         run: ls -R ./dist
+      - name : Install plugin
+        run: serverless plugin install -n serverless-offline
       - name: Upload
         uses: serverless/github-action@master
         with:
