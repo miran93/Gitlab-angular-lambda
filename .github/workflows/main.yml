@@ -32,3 +32,11 @@ jobs:
           npm run build:prod
       - name: List Files in Distribution Directory
         run: ls -R ./dist
+      - name: Upload
+        uses: serverless/github-action@master
+        with:
+          args: deploy
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          local-dir: "dist/"
