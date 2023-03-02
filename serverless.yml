@@ -26,5 +26,4 @@ package:
     - dist-angular-browser/**
 
 plugins:
-  - serverless-apigw-binary
   - serverless-offline
