@@ -30,7 +30,5 @@ jobs:
         run: |
           npm i
           npm run build:prod
-      - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "dist/angular-githubaction/*"
+      - name: List Files in Distribution Directory
+        run: ls -R ./dist
