@@ -32,7 +32,7 @@ jobs:
           npm run build:prod
       - name: List Files in Distribution Directory
         run: ls -R ./dist
-      - name : Install plugin
+      - name : Install plugin for serverless
         run: |
           npm install serverless-offline --save-dev
       - name: Upload
