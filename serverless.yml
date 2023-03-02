@@ -1,6 +1,6 @@
 service: lambda-anguar-universal-test
 
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: "3.28.1"
 
 provider:
   name: aws
