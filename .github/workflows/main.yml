@@ -35,12 +35,15 @@ jobs:
       - name : Install plugin for serverless
         run: |
           npm install serverless-offline --save-dev
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       - name: Upload
         uses: serverless/github-action@master
         with:
           args: deploy
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
           local-dir: "dist/"
           run: aws lambda update-function-code --function-name  arn:aws:lambda:us-east-1:282510063790:function:AngularApplication --zip-file fileb://dist.zip
