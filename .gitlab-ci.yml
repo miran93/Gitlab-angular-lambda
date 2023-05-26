@@ -22,6 +22,7 @@ build:
 package:
   stage: package
   before_script:
+    - npm install -g serverless
     - serverless plugin install -n serverless-offline
   script:
     - sls package --package /tmp/package
