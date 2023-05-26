@@ -9,15 +9,11 @@ variables:
   LAMBDA_HANDLER: "index.handler"
   LAMBDA_RUNTIME: "nodejs14.x"
 
-
-before_script:
-  - npm install -g serverless
-  - serverless plugin install -n serverless-offline
-
 build:
   stage: build
   image: node:14
   before_script:
+    - npm install -g serverless
     - npm install
   script:
     - npm run build
@@ -25,6 +21,8 @@ build:
 
 package:
   stage: package
+  before_script:
+    - serverless plugin install -n serverless-offline
   script:
     - sls package --package /tmp/package
 
