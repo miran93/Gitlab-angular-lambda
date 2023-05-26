@@ -15,8 +15,12 @@ before_script:
 
 build:
   stage: build
-  script:
+  image: node:14
+  before_script:
     - npm install
+  script:
+    - npm run build
+    
 
 package:
   stage: package
