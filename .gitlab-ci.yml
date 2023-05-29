@@ -16,11 +16,9 @@ build:
 
 archive:
   stage: archiving
-
   before_script:
     - apt-get update
     - apt-get install zip -y
-
   script:
     - echo "Archiving lambda code"
     - zip -r $CI_PROJECT_NAME.zip *
