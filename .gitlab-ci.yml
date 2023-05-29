@@ -1,34 +1,23 @@
 stages:
   - build
-  - package
   - deploy
 
 variables:
-  AWS_DEFAULT_REGION: "us-east-1"
+  AWS_REGION: us-east-1
   LAMBDA_FUNCTION_NAME: "AngularGitLab"
-  LAMBDA_HANDLER: "index.handler"
-  LAMBDA_RUNTIME: "nodejs14.x"
 
 build:
   stage: build
   image: node:14
-  before_script:
-    - npm install -g serverless
-    - npm install
-    - serverless plugin install -n serverless-offline
   script:
-    - npm run build
-    
-
-package:
-  stage: package
-  script:
-    - sls package --package /tmp/package
+    - npm ci
+    - npm run build -- --prod
 
 deploy:
   stage: deploy
   image: python:3.8
-  script:
+  before_script:
     - pip install awscli
-    - aws s3 cp /tmp/package s3://$S3_BUCKET_NAME/$S3_KEY
+  script:
+    - aws s3 sync dist s3://$S3_BUCKET_NAME --delete
     - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --s3-bucket $S3_BUCKET_NAME --s3-key $S3_KEY
