@@ -15,7 +15,7 @@ build:
     - npm run build -- --prod
 
 archive:
-  stage: archiving
+  stage: archive
   before_script:
     - apt-get update
     - apt-get install zip -y
